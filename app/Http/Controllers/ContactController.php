@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * お問い合わせ一覧の取得
      */
     public function index()
     {
@@ -21,6 +21,9 @@ class ContactController extends Controller
         return view('contact.index', compact('categories', 'tags'));
     }
 
+    /**
+     * 確認画面の取得
+     */
     public function confirm(StoreContactRequest $request)
     {
         $validated = $request->validated();
@@ -31,7 +34,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * お問い合わせを新規作成
      */
     public function store(StoreContactRequest $request)
     {
@@ -47,40 +50,11 @@ class ContactController extends Controller
         return redirect()->route('contacts.thanks')->with('success', 'お問い合わせを作成しました。');
     }
 
+    /**
+     * サンクスページの取得
+     */
     public function thanks()
     {
         return view('contact.thanks');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

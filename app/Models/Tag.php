@@ -20,7 +20,7 @@ class Tag extends Model
     ];
 
     /**
-     * このタグに属するコンタクトを取得
+     * このタグに属するお問い合わせを取得
      */
     public function contacts(): BelongsToMany
     {

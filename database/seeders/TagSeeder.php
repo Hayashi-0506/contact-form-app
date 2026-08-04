@@ -12,29 +12,10 @@ class TagSeeder extends Seeder
      */
     public function run(): void
     {
-        // 商品のお届けについて
-        Tag::create([
-            'name' => '質問',
-        ]);
-
-        // 商品の交換について
-        Tag::create([
-            'name' => '要望',
-        ]);
-
-        // 商品トラブル
-        Tag::create([
-            'name' => '不具合報告',
-        ]);
-
-        // ショップへのお問い合わせ
-        Tag::create([
-            'name' => 'ご意見',
-        ]);
-
-        // その他
-        Tag::create([
-            'name' => 'その他',
-        ]);
+        Tag::create(['name' => '質問']);
+        Tag::create(['name' => '要望']);
+        Tag::create(['name' => '不具合報告']);
+        Tag::create(['name' => 'ご意見']);
+        Tag::create(['name' => 'その他']);
     }
 }

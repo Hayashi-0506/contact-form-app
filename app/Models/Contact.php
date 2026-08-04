@@ -29,7 +29,7 @@ class Contact extends Model
     ];
 
     /**
-     * このコンタクトに属するカテゴリーを取得
+     * このお問い合わせに属するカテゴリーを取得
      */
     public function category(): BelongsTo
     {
@@ -37,7 +37,7 @@ class Contact extends Model
     }
 
     /**
-     * このコンタクトに属するタグを取得
+     * このお問い合わせに属するタグを取得
      */
     public function tags(): BelongsToMany
     {
