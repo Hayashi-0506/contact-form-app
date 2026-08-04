@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreContactRequest extends FormRequest
 {
     /**
-     * リクエストの認可 ※誰でも許可するため一律True
+     * リクエストの認可
      */
     public function authorize(): bool
     {

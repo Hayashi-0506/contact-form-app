@@ -20,7 +20,7 @@ class Category extends Model
     ];
 
     /**
-     * このカテゴリーに属するコンタクトを取得
+     * このカテゴリーに属するお問い合わせを取得
      */
     public function contacts(): HasMany
     {
