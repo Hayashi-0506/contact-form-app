@@ -40,7 +40,7 @@ class StoreContactRequest extends FormRequest
             'tel3' => ['required', 'string'],
             'address' => 'required|string|max:255',
             'building' => 'nullable|string|max:255',
-            'detail' => 'nullable|string|max:120',
+            'detail' => 'required|string|max:120',
             'tag_ids' => 'nullable|array',
             'tag_ids.*' => 'exists:tags,id',
         ];
@@ -58,6 +58,7 @@ class StoreContactRequest extends FormRequest
             'email.required' => 'メールアドレスを入力してください',
             'email.email' => 'メールアドレスはメール形式で入力してください',
             'tel.required' => '電話番号を入力してください',
+            'tel.regex' => '電話番号は正しい形式（10-11桁の半角数字、ハイフンなし）入力してください',
             'address.required' => '住所を入力してください',
             'category_id.required' => 'お問い合わせの種類を選択してください',
             'detail.required' => 'お問い合わせ内容を入力してください',
