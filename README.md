@@ -88,47 +88,11 @@ sail npm install
 sail npm install -D tailwindcss@^3.4.0 postcss autoprefixer
 sail npm install alpinejs
 
-# 3. 設定ファイルの生成
-sail npx tailwindcss init -p
-
-# 4. Tailwind CSSのテンプレートパス設定
-tailwind.config.js を開き、以下のように設定します。
-/** @type {import("tailwindcss").Config} */
-export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./resources/**/*.vue",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-
-# 6. Vite開発サーバーの起動
+# 3. Vite開発サーバーの起動
 sail npm run dev
 注意: sail npm run dev は実行したままにしておく必要があります。
 
-8. phpMyAdminの追加
-#compose.yaml を開き、mysql サービスの後に以下の設定を追加してください。
-
-compose.yaml に追加する内容:
-
-    phpmyadmin:
-        image: 'phpmyadmin:latest'
-        ports:
-            - '${FORWARD_PHPMYADMIN_PORT:-8080}:80'
-        environment:
-            PMA_HOST: mysql
-            PMA_USER: '${DB_USERNAME}'
-            PMA_PASSWORD: '${DB_PASSWORD}'
-        networks:
-            - sail
-        depends_on:
-            - mysql
-
-9. Sailの起動とエイリアス設定
+8. Sailの起動とエイリアス設定
 # Sailをバックグラウンドで起動
 ./vendor/bin/sail up -d
 
@@ -141,11 +105,11 @@ echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.zshrc
 # シェルを再起動するか、新しいターミナルを開いてエイリアスを有効にする
 exec $SHELL
 
-10. アプリケーションキーの生成
+9. アプリケーションキーの生成
 #ルートで以下のコマンドを実行する
 sail artisan key:generate
 
-11. データベースのマイグレーションと初期データ投入
+10. データベースのマイグレーションと初期データ投入
 # 以下のコマンドでテーブルを作成し、初期データを投入します。
 sail artisan migrate --seed
 
