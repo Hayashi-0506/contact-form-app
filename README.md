@@ -77,7 +77,20 @@ DB_DATABASE=laravel
 DB_USERNAME=sail
 DB_PASSWORD=password
 
-7. フロントエンドのセットアップ (Vite & Tailwind CSS)
+7. Sailの起動とエイリアス設定
+# Sailをバックグラウンドで起動
+./vendor/bin/sail up -d
+
+# エイリアスを設定して 'sail' だけでコマンドを実行できるようにする
+echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.zshrc
+
+# または bash の場合
+# echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.bashrc
+
+# シェルを再起動するか、新しいターミナルを開いてエイリアスを有効にする
+exec $SHELL
+
+8. フロントエンドのセットアップ (Vite & Tailwind CSS)
 本プロジェクトでは、フロントエンドのスタイリングにTailwind CSSを使用します。
 
 # 1. NPM依存パッケージのインストール
@@ -91,19 +104,6 @@ sail npm install alpinejs
 # 3. Vite開発サーバーの起動
 sail npm run dev
 注意: sail npm run dev は実行したままにしておく必要があります。
-
-8. Sailの起動とエイリアス設定
-# Sailをバックグラウンドで起動
-./vendor/bin/sail up -d
-
-# エイリアスを設定して 'sail' だけでコマンドを実行できるようにする
-echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.zshrc
-
-# または bash の場合
-# echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.bashrc
-
-# シェルを再起動するか、新しいターミナルを開いてエイリアスを有効にする
-exec $SHELL
 
 9. アプリケーションキーの生成
 #ルートで以下のコマンドを実行する
