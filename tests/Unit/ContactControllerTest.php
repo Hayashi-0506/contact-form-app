@@ -180,9 +180,9 @@ class ContactControllerTest extends TestCase
     {
         $contact = Contact::create(self::$validBaseData);
         $contact->tags()->attach(self::$validBaseData['tag_ids']);
-        
+
         $contacts = Contact::find($contact->id)->with('tags')->get();
-        
+
         foreach ($contacts as $contact) {
             $this->assertTrue($contact->tags->isNotEmpty());
         }

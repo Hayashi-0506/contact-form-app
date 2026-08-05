@@ -35,7 +35,7 @@ class ContactControllerTest extends TestCase
             'address' => '東京都杉並区',
             'building' => 'コーポサザン101',
             'detail' => '問い合わせ内容のテキストです。',
-            'tag_ids' => [1,2,3],
+            'tag_ids' => [1, 2, 3],
         ];
     }
 
@@ -43,7 +43,7 @@ class ContactControllerTest extends TestCase
     public function お問い合わせフォーム入力ページが表示できる(): void
     {
         $response = $this->get('/');
-        
+
         $response->assertStatus(200);
     }
 
@@ -51,7 +51,7 @@ class ContactControllerTest extends TestCase
     public function お問い合わせ内容を確認できる(): void
     {
         $response = $this->post(route('contacts.confirm'), self::$validBaseData);
-        
+
         $response->assertStatus(200);
         $response->assertViewIs('contact.confirm');
     }
@@ -61,7 +61,7 @@ class ContactControllerTest extends TestCase
     {
         self::$validBaseData['first_name'] = '';
         $response = $this->post(route('contacts.confirm'), self::$validBaseData);
-        
+
         $response->assertSessionHasErrors(['first_name']);
     }
 
@@ -70,7 +70,7 @@ class ContactControllerTest extends TestCase
     {
         self::$validBaseData['last_name'] = '';
         $response = $this->post(route('contacts.confirm'), self::$validBaseData);
-        
+
         $response->assertSessionHasErrors(['last_name']);
     }
 
@@ -79,7 +79,7 @@ class ContactControllerTest extends TestCase
     {
         self::$validBaseData['gender'] = '';
         $response = $this->post(route('contacts.confirm'), self::$validBaseData);
-        
+
         $response->assertSessionHasErrors(['gender']);
     }
 
@@ -88,7 +88,7 @@ class ContactControllerTest extends TestCase
     {
         self::$validBaseData['tel'] = '';
         $response = $this->post(route('contacts.confirm'), self::$validBaseData);
-        
+
         $response->assertSessionHasErrors(['tel']);
     }
 
@@ -97,7 +97,7 @@ class ContactControllerTest extends TestCase
     {
         self::$validBaseData['tel'] = '080-1111-2222';
         $response = $this->post(route('contacts.confirm'), self::$validBaseData);
-        
+
         $response->assertSessionHasErrors(['tel']);
     }
 
@@ -106,7 +106,7 @@ class ContactControllerTest extends TestCase
     {
         self::$validBaseData['address'] = '';
         $response = $this->post(route('contacts.confirm'), self::$validBaseData);
-        
+
         $response->assertSessionHasErrors(['address']);
     }
 
@@ -115,7 +115,7 @@ class ContactControllerTest extends TestCase
     {
         self::$validBaseData['category_id'] = null;
         $response = $this->post(route('contacts.confirm'), self::$validBaseData);
-        
+
         $response->assertSessionHasErrors(['category_id']);
     }
 
@@ -124,7 +124,7 @@ class ContactControllerTest extends TestCase
     {
         self::$validBaseData['detail'] = null;
         $response = $this->post(route('contacts.confirm'), self::$validBaseData);
-        
+
         $response->assertSessionHasErrors(['detail']);
     }
 
@@ -132,8 +132,8 @@ class ContactControllerTest extends TestCase
     public function お問い合わせ内容を登録できる(): void
     {
         $response = $this->post(route('contacts.store'), self::$validBaseData);
-        
-        //サンクスページにリダイレクトされることを確認
+
+        // サンクスページにリダイレクトされることを確認
         $response->assertRedirect(route('contacts.thanks'));
     }
 }

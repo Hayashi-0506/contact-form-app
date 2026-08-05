@@ -7,7 +7,6 @@ use App\Models\Contact;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AdminControllerTest extends TestCase
@@ -49,7 +48,7 @@ class AdminControllerTest extends TestCase
         $contact = Contact::factory()->create();
 
         // Act
-        $response = $this->actingAs($user)->get(route('admin.show',$contact));
+        $response = $this->actingAs($user)->get(route('admin.show', $contact));
 
         // Assert
         $response->assertStatus(200);
@@ -63,10 +62,9 @@ class AdminControllerTest extends TestCase
         $tag = Tag::factory()->create();
 
         // Act
-        $response = $this->actingAs($user)->get(route('admin.tags.edit',$tag));
+        $response = $this->actingAs($user)->get(route('admin.tags.edit', $tag));
 
         // Assert
         $response->assertStatus(200);
     }
-
 }

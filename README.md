@@ -19,12 +19,24 @@ COACHTECHの確認テストとして作成した成果物です。
 mkdir laravel-practice
 cd laravel-practice
 
-2.クローンを取得
+2．クローンを取得
 # クローン
 git clone https://github.com/Hayashi-0506/contact-form-app.git contact-form-app
 cd contact-form-app
 
-3.Laravel Sailのインストール
+3. パッケージをインストールする
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
+    laravelsail/php82-composer:latest \
+    composer install
+
+4. 環境設定ファイルを作成する
+cp .env.example .env
+
+5. Laravel Sailのインストール
 # Laravel Sailをインストール
 docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -56,7 +68,7 @@ mysql:
     platform: 'linux/amd64'  # ← この行を追加
     ports:
 
-4. .env ファイルの設定
+6. .env ファイルの設定
 #.env ファイルを開き、データベース接続情報が以下と一致していることを確認します。
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -64,57 +76,6 @@ DB_PORT=3306
 DB_DATABASE=laravel
 DB_USERNAME=sail
 DB_PASSWORD=password
-
-5. フロントエンドのセットアップ (Vite & Tailwind CSS)
-本プロジェクトでは、フロントエンドのスタイリングにTailwind CSSを使用します。
-
-# 1. NPM依存パッケージのインストール
-> 重要: sail npm install を実行する前に、必ずSailコンテナが起動していることを確認してください。
-sail npm install
-
-# 2. Tailwind CSSのインストール
-sail npm install -D tailwindcss@^3.4.0 postcss autoprefixer
-sail npm install alpinejs
-
-# 3. 設定ファイルの生成
-sail npx tailwindcss init -p
-
-# 4. Tailwind CSSのテンプレートパス設定
-tailwind.config.js を開き、以下のように設定します。
-/** @type {import("tailwindcss").Config} */
-export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./resources/**/*.vue",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-
-# 6. Vite開発サーバーの起動
-sail npm run dev
-注意: sail npm run dev は実行したままにしておく必要があります。
-
-6. phpMyAdminの追加
-#compose.yaml を開き、mysql サービスの後に以下の設定を追加してください。
-
-compose.yaml に追加する内容:
-
-    phpmyadmin:
-        image: 'phpmyadmin:latest'
-        ports:
-            - '${FORWARD_PHPMYADMIN_PORT:-8080}:80'
-        environment:
-            PMA_HOST: mysql
-            PMA_USER: '${DB_USERNAME}'
-            PMA_PASSWORD: '${DB_PASSWORD}'
-        networks:
-            - sail
-        depends_on:
-            - mysql
 
 7. Sailの起動とエイリアス設定
 # Sailをバックグラウンドで起動
@@ -129,11 +90,26 @@ echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.zshrc
 # シェルを再起動するか、新しいターミナルを開いてエイリアスを有効にする
 exec $SHELL
 
-8. アプリケーションキーの生成
+8. フロントエンドのセットアップ (Vite & Tailwind CSS)
+本プロジェクトでは、フロントエンドのスタイリングにTailwind CSSを使用します。
+
+# 1. NPM依存パッケージのインストール
+> 重要: sail npm install を実行する前に、必ずSailコンテナが起動していることを確認してください。
+sail npm install
+
+# 2. Tailwind CSSのインストール
+sail npm install -D tailwindcss@^3.4.0 postcss autoprefixer
+sail npm install alpinejs
+
+# 3. Vite開発サーバーの起動
+sail npm run dev
+注意: sail npm run dev は実行したままにしておく必要があります。
+
+9. アプリケーションキーの生成
 #ルートで以下のコマンドを実行する
 sail artisan key:generate
 
-9. データベースのマイグレーションと初期データ投入
+10. データベースのマイグレーションと初期データ投入
 # 以下のコマンドでテーブルを作成し、初期データを投入します。
 sail artisan migrate --seed
 
