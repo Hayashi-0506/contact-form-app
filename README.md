@@ -126,6 +126,7 @@ sail artisan migrate:fresh --seed
 - 開発ツール : Docker, Laravel Sail, phpMyAdmin
 
 ## APIエンドポイント一覧
+- http://localhost/api/v1/contacts
 
 ## 開発環境URL
 - お問い合わせ画面：http://localhost
