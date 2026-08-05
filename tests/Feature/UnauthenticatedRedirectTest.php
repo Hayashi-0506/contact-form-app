@@ -23,7 +23,7 @@ class UnauthenticatedRedirectTest extends TestCase
     {
         $tag = Tag::factory()->create();
 
-        $response = $this->get(route('admin.tags.edit',$tag));
+        $response = $this->get(route('admin.tags.edit', $tag));
 
         $response->assertRedirect(route('login'));
     }

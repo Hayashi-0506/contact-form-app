@@ -74,9 +74,9 @@ class TagControllerTest extends TestCase
     {
         $tag = Tag::factory()->create();
         $request = new UpdateTagRequest;
-        
+
         $rules = $request->rules();
-        $rules['name'] = $rules['name'] . $tag->id;
+        $rules['name'] = $rules['name'].$tag->id;
 
         $validator = FacadesValidator::make($tag->toArray(), $request->rules());
         $this->assertFalse($validator->passes());
